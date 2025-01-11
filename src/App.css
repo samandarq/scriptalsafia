@@ -1,0 +1,310 @@
+/* Umumiy body uchun */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  transition: background-color 0.5s ease;
+}
+
+/* App div */
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  transition: background-color 0.5s ease;
+}
+
+/* Section konteyner */
+.section-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Fade-in animatsiyasi */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Har bir qism sarlavhasi */
+.card-title {
+  font-size: 24px;
+  color: #444;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.card-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #007bff;
+  margin: 8px auto 0;
+  border-radius: 3px;
+}
+
+/* Qism kontenti */
+.section-content {
+  margin-bottom: 20px;
+}
+
+/* Mahsulot ro'yxati */
+.product-list {
+  list-style: none;
+  padding: 0;
+}
+
+.product-item {
+  cursor: pointer;
+  padding: 10px 15px;
+  margin: 10px 0;
+  background: #f4f4f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+.product-item:hover {
+  background-color: #e6f7ff;
+  transform: translateX(5px);
+}
+
+/* Mahsulot ma'lumoti */
+.product-info {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  animation: slideIn 0.5s ease;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* Slide-in animatsiyasi */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tugmalar uchun */
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.prev-btn {
+  background-color: red;
+}
+
+.prev-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Range input stili */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  background: #ddd;
+  outline: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #0056b3;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Media Queries: Mobil uchun moslashuv */
+@media (max-width: 768px) {
+  .section-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .product-item {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .product-info {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-title {
+    font-size: 20px;
+  }
+
+  .btn {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+
+/* Soat uchun qo'shimcha stil */
+.clock-container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  font-family: 'Courier New', Courier, monospace;
+  transition: all 0.3s ease;
+  z-index: 9999; /* Ustma-ust elementlar uchun yuqori qatlam */
+  margin: 10px; /* Soatni boshqa elementlardan ajratish uchun */
+}
+
+/* Soatni zamonaviy ko'rinishga keltirish */
+.clock-container .time {
+  text-align: center;
+}
+
+.clock-container .time p {
+  margin: 5px 0;
+}
+
+/* Soat animatsiyasi */
+@keyframes clockSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.clock-container {
+  animation: clockSlideIn 0.5s ease-out;
+}
+
+/* Boshqa ko'rinishda tayyorlash */
+@media (max-width: 768px) {
+  .clock-container {
+    top: 20px;
+    right: 10px;
+    font-size: 18px;
+    padding: 10px;
+  }
+}
+
+
+
+.product-image{
+  width: 200px;
+  height: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.product-item.active {
+  background-color: rgb(16, 178, 232);
+  color: white;
+}
+
+.btn.active {
+  background-color: rgb(16, 178, 232);
+  
+}
+
+
