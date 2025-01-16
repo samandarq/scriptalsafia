@@ -149,6 +149,20 @@ body {
 }
 
 
+/* 4qism savol javob qismi  */
+
+.faq-list {
+  margin-top: 10px;
+  padding: 0;
+  list-style: none;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+
 /* Slide-in animatsiyasi */
 @keyframes slideIn {
   from {

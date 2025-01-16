@@ -13,15 +13,16 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeProduct, setActiveProduct] = useState(null);
   const [selectedIllness, setSelectedIllness] = useState(null);
+  const [conversationStep, setConversationStep] = useState(0);
 
   const products = [
     { name: 'Dr Beezee', info: `Dr Beezee haqida ma'lumot.`, image: Drbeezee, illnesses: [
-      { name: 'Kasallik: oshqozon yazvasi', cure: 'Davosi: omega-3.' }, 
-      { name: 'Kasallik B', cure: 'Davosi: DEF.' }
+      { name: 'Kasallik: Prostata shamollashi', cure: 'Davosi: Dr beezee.' }, 
+      { name: 'Kasallik: Jinsiy zaiflik', cure: 'Davosi: Dr beezee.' }
     ] },
     { name: 'HLT', info: `HLT haqida ma'lumot.`, image: HLT, illnesses: [
-      { name: 'Kasallik C', cure: 'Davosi: GHI.' },
-      { name: 'Kasallik D', cure: 'Davosi: JKL.' }
+      { name: 'Kasallik: Aloqa sifati pasligi', cure: 'Davosi: HLT.' },
+      { name: 'Kasallik Qon aylanishi yomonligi', cure: 'Davosi: HLT.' }
     ] },
     { name: 'Omega-3', info: `Omega-3 haqida ma'lumot.`, image: Omega3, illnesses: [
       { name: 'Kasallik E', cure: 'Davosi: MNO.' },
@@ -31,6 +32,13 @@ function App() {
       { name: 'Kasallik G', cure: 'Davosi: STU.' },
       { name: 'Kasallik H', cure: 'Davosi: VWX.' }
     ] },
+  ];
+
+  const conversation = [
+    { question: "Mahsulotni qanday qabul qilishni bilasizmi?", answer: "Ha, bilaman." },
+    { question: "Mahsulotdan foydalanish bo'yicha qo'shimcha savolingiz bormi?", answer: "Yo'q, tushunarli." },
+    { question: "Siz mahsulotdan qancha vaqt foydalanmoqchisiz?", answer: "Taxminan bir oy." },
+    { question: "Buyurtma berishni hohlaysizmi?", answer: "Ha, buyurtma beraman." },
   ];
 
   const sections = [
@@ -84,7 +92,6 @@ function App() {
                 key={index}
                 className={`product-item ${selectedIllness === illness.name ? 'active' : ''}`}
                 onClick={() => {
-                  // Agar tanlangan kasallik hozirgi bo'lsa, o'chiradi, aks holda yangilaydi
                   setSelectedIllness(prevIllness =>
                     prevIllness === illness ? null : illness
                   );
@@ -105,8 +112,6 @@ function App() {
         <p>Mahsulot tanlanmagan. Iltimos, 1-qismda mahsulotni tanlang.</p>
       ),
     },
-    
-    
     {
       id: 4,
       title: '4-QISM: MAHSULOT HAQIDA MA\'LUMOT',
@@ -123,7 +128,31 @@ function App() {
     },
     {
       id: 5,
-      title: '5-QISM: XULOSA VA YAKUN',
+      title: '5-QISM: SAVOL-JAVOB',
+      backgroundColor: '#e8f5e9',
+      content: (
+        <div>
+          <h4>Sotuvchi va mijoz o'rtasida savol-javob</h4>
+          {conversationStep < conversation.length ? (
+            <div>
+              <p><strong>Sotuvchi:</strong> {conversation[conversationStep].question}</p>
+              <p><strong>Mijoz:</strong> {conversation[conversationStep].answer}</p>
+              <button
+                className="btn next-btn"
+                onClick={() => setConversationStep(conversationStep + 1)}
+              >
+                Keyingi savol
+              </button>
+            </div>
+          ) : (
+            <p>Barcha savol-javoblar yakunlandi.</p>
+          )}
+        </div>
+      ),
+    },
+    {
+      id: 6,
+      title: '6-QISM: XULOSA VA YAKUN',
       backgroundColor: '#d9edf7',
       content: (
         <div>
@@ -131,6 +160,7 @@ function App() {
         </div>        
       ),
     },
+
   ];
 
   const nextSection = () => {
@@ -176,3 +206,4 @@ function App() {
 }
 
 export default App;
+  
