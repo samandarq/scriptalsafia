@@ -3,42 +3,40 @@ import Clock from './Clock'; // Clock komponentini import qilish
 import './Clock.css'; // Clock uchun CSS import qilish
 import './App.css';
 
-import Omega3 from "./components/img/omega.JPG";
-import Drbeezee from "./components/img/drbeezee.jpg";
-import Kistulhindi from "./components/img/Kistulhindi.webp";
-import HLT from "./components/img/hilt.png";
+import Omega3 from "./components/assets/omega.JPG";
+import Drbeezee from "./components/assets/drbeezee.jpg";
+import Kistulhindi from "./components/assets/Kistulhindi.webp";
+import HLT from "./components/assets/hilt.png";
 
 function App() {
   const [currentSection, setCurrentSection] = useState(1);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [dayName, setDayName] = useState('');
   const [activeProduct, setActiveProduct] = useState(null);
+  const [selectedIllness, setSelectedIllness] = useState(null);
 
   const products = [
-    { name: 'Dr Beezee', info: `Dr Beezee haqida ma'lumot. Kasalliklar: XYZ, davo: ABC.`, image: Drbeezee, category: 'Kasallik: XYZ', cure: 'Og\'riqni davo beradi.' },
-    { name: 'HLT', info: `HLT haqida ma'lumot. Kasalliklar: DEF, davo: GHI.`, image: HLT, category: 'Kasallik: DEF', cure: 'Og\'riqni davo beradi.' },
-    { name: 'Tibbio Tibomed', info: `Tibbio Tibomed haqida ma'lumot. Kasalliklar: UVW, davo: JKL.`, image: Omega3, category: 'Kasallik: UVW', cure: 'Og\'riqni davo beradi.' },
-    { name: 'Omega-3', info: `Omega-3 haqida ma'lumot. Kasalliklar: ABC, davo: MNO.`, image: Omega3, category: 'Kasallik: ABC', cure: 'Og\'riqni davo beradi.' },
-    { name: 'Kist ul hindi', info: `Kist ul hindi haqida ma'lumot. Kasalliklar: PQR, davo: STU.`, image: Kistulhindi, category: 'Kasallik: PQR', cure: 'Og\'riqni davo beradi.' },
+    { name: 'Dr Beezee', info: `Dr Beezee haqida ma'lumot.`, image: Drbeezee, illnesses: [
+      { name: 'Kasallik: oshqozon yazvasi', cure: 'Davosi: omega-3.' }, 
+      { name: 'Kasallik B', cure: 'Davosi: DEF.' }
+    ] },
+    { name: 'HLT', info: `HLT haqida ma'lumot.`, image: HLT, illnesses: [
+      { name: 'Kasallik C', cure: 'Davosi: GHI.' },
+      { name: 'Kasallik D', cure: 'Davosi: JKL.' }
+    ] },
+    { name: 'Omega-3', info: `Omega-3 haqida ma'lumot.`, image: Omega3, illnesses: [
+      { name: 'Kasallik E', cure: 'Davosi: MNO.' },
+      { name: 'Kasallik F', cure: 'Davosi: PQR.' }
+    ] },
+    { name: 'Kist ul hindi', info: `Kist ul hindi haqida ma'lumot.`, image: Kistulhindi, illnesses: [
+      { name: 'Kasallik G', cure: 'Davosi: STU.' },
+      { name: 'Kasallik H', cure: 'Davosi: VWX.' }
+    ] },
   ];
 
   const sections = [
     {
       id: 1,
-      title: '1-QISM: MIJOZNI KUTIB OLISH',
-      backgroundColor: '#f0f8ff',
-      content: (
-        <div>
-          <Clock />
-          <p>Assalomu alaykum, Davron aka! Yaxshimisiz?</p>
-          <p><strong>Mijoz javobi:</strong> Vaaleykum assalom, rahmat, yaxshi, kim bu?</p>
-          <p><strong>Sotuvchi:</strong> Men Alsafia xalqaro kompaniyasining tajribali eksperti FAMILIYA ISMIZ bo'laman. HLT shifobaxsh HERBAL PASTAmizga murojaat qilgan ekansiz. BEPUL konsultatsiya olish uchun yozilgansiz.</p>
-        </div>
-      ),
-    },
-    {
-      id: 2,
-      title: "2-QISM: MAHSULOT HAQIDA SO'RASH",
+      title: "1-QISM: MAHSULOTLAR RO'YXATI",
       backgroundColor: '#e6ffe6',
       content: (
         <div>
@@ -61,29 +59,66 @@ function App() {
       ),
     },
     {
+      id: 2,
+      title: '2-QISM: MIJOZNI KUTIB OLISH',
+      backgroundColor: '#f0f8ff',
+      content: (
+        <div>
+          <Clock />
+          <p>Assalomu alaykum, Davron aka! Yaxshimisiz?</p>
+          <p><strong>Mijoz javobi:</strong> Vaaleykum assalom, rahmat, yaxshi, kim bu?</p>
+          <p><strong>Sotuvchi:</strong> Men Alsafia xalqaro kompaniyasining tajribali eksperti bo'laman. BEPUL konsultatsiya olish uchun yozilgansiz.</p>
+        </div>
+      ),
+    },
+    {
       id: 3,
-      title: '3-QISM: MAHSULOT HAQIDA MA\'LUMOT',
+      title: '3-QISM: KASALLIKLAR VA DAVO',
+      backgroundColor: '#fff2cc',
+      content: selectedProduct ? (
+        <div>
+          <p>{selectedProduct.name} mahsuloti tegishli bo'lgan kasalliklar:</p>
+          <ul className="product-list">
+            {selectedProduct.illnesses.map((illness, index) => (
+              <li
+                key={index}
+                className={`product-item ${selectedIllness === illness.name ? 'active' : ''}`}
+                onClick={() => {
+                  // Agar tanlangan kasallik hozirgi bo'lsa, o'chiradi, aks holda yangilaydi
+                  setSelectedIllness(prevIllness =>
+                    prevIllness === illness ? null : illness
+                  );
+                }}
+              >
+                {illness.name}
+              </li>
+            ))}
+          </ul>
+          {selectedIllness && (
+            <div className="illness-info">
+              <h4>{selectedIllness.name}</h4>
+              <p>{selectedIllness.cure}</p>
+            </div>
+          )}
+        </div>
+      ) : (
+        <p>Mahsulot tanlanmagan. Iltimos, 1-qismda mahsulotni tanlang.</p>
+      ),
+    },
+    
+    
+    {
+      id: 4,
+      title: '4-QISM: MAHSULOT HAQIDA MA\'LUMOT',
       backgroundColor: '#ffe6e6',
       content: selectedProduct ? (
         <div className="product-info">
           <h3>{selectedProduct.name}</h3>
           <img src={selectedProduct.image} alt={selectedProduct.name} className="product-image" />
           <p>{selectedProduct.info}</p>
-          <p><strong>Kasallik: </strong>{selectedProduct.category}</p>
-          <p><strong>Davo: </strong>{selectedProduct.cure}</p>
         </div>
       ) : (
         <p>Mahsulot tanlanmagan.</p>
-      ),
-    },
-    {
-      id: 4,
-      title: '4-QISM: SAVOLLAR VA JAVOBLAR',
-      backgroundColor: '#fff2cc',
-      content: (
-        <div>
-          <p>Mijozning savollariga javob berish uchun bu yerda ma'lumot kiritiladi.</p>
-        </div>
       ),
     },
     {
@@ -93,7 +128,7 @@ function App() {
       content: (
         <div>
           <p>Mijozga xizmatlar uchun minnatdorchilik bildiring va bog'lanish uchun ma'lumot qoldiring.</p>
-        </div>
+        </div>        
       ),
     },
   ];
@@ -110,21 +145,13 @@ function App() {
     }
   };
 
-  // Set the day name
-  useEffect(() => {
-    const date = new Date();
-    const day = date.toLocaleString('uz-UZ', { weekday: 'long' });
-    setDayName(day);
-  }, []); 
-
-  // Orqa fonni bodyga o'zgartirish uchun useEffect qo'shish
   useEffect(() => {
     document.body.style.backgroundColor = sections[currentSection - 1].backgroundColor;
   }, [currentSection]);
 
   return (
     <div className="App">
-     <Clock />
+      <Clock />
       <div className="section-container">
         <h2 className='card-title'>{sections[currentSection - 1].title}</h2>
         <div className="section-content">

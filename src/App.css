@@ -105,6 +105,50 @@ body {
   margin: 10px 0;
 }
 
+/* 3qism dizayn */
+
+.product-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-item {
+  padding: 10px 15px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.product-item:hover {
+  background-color: #eef;
+}
+
+.product-item.active {
+  background-color: #cce5ff;
+  font-weight: bold;
+  border-color: #007bff;
+}
+
+.illness-info {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fffbe6;
+  border: 1px solid #ffeeba;
+  border-radius: 5px;
+}
+
+.illness-info h4 {
+  margin-bottom: 10px;
+}
+
+.illness-info p {
+  margin: 0;
+}
+
+
 /* Slide-in animatsiyasi */
 @keyframes slideIn {
   from {
@@ -277,23 +321,6 @@ input[type="range"]::-moz-range-thumb {
   width: 200px;
   height: 200px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
